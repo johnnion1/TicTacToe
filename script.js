@@ -1,13 +1,28 @@
 const myModule = (function() {
 
         let _gameBoard = {
-                board: [null, null, null, null, null, null, null, null, null]
+                board: [null, null, null, 'O', null, null, null, null, null]
         };
-        const cacheDom = {
+        /* Confused: used    Object Literal Module   pattern but is different
+        watch videos
+        
+         const cacheDom = {
+               this.container = document.querySelector('#container');
+               this.playerDisplay = container.find('#playerDisplay')
+        } */
+        const _cacheDom = {
                 container: document.querySelector('#container'),
+                playerDisplay: document.querySelector('#playerDisplay'),
+                gameBoardSelect: document.querySelector('#gameBoard'),
         }
         const _displayController = () => {
                 console.log(_gameBoard.board);
+                for (let i = 0; i < _gameBoard.board.length; i++) {
+                        let field = document.createElement('div');
+                        field.textContent = _gameBoard.board[i];
+                        _cacheDom.gameBoardSelect.appendChild(field);
+
+                }
         };
         const game = {
 
@@ -18,7 +33,6 @@ const myModule = (function() {
 
         }
 return {
-        cacheDom,
         game,
 }
 })();
