@@ -1,10 +1,15 @@
+:root {
+        --backgroundColor: rgb(98, 23, 98); /* rgb(114, 43, 114) */
+        --gridColor: rgb(50, 156, 202); /*  rgb(115, 168, 186); rgb(50, 156, 202)*/
+
+}
 * {
         box-sizing: border-box;
         padding: 0;
         margin: 0;
 }
 body, html {
-        background-color: rgb(255, 217, 255);
+        background-color: var(--backgroundColor);
         width: 100%;
         height: 100%;
 }
@@ -21,12 +26,30 @@ body, html {
         background-color: #fff;
         grid-row: 2 / 3;
         grid-column: 2 / 3;
+        font-size: 8rem;
+        padding-left: 3vh;
+        display: flex;
+        align-items: center;
 }
 #gameBoard {   
+        background-color: var(--gridColor);
         height: 50vh;
         width: 50vh;
-        background-color: lightblue;
+        justify-self: center;
         grid-row: 4 / 5;
-        grid-column: 2 / 3 ;
-        
+        grid-column: 2 / 3;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-gap: 15px;
+        border: 15px solid var(--gridColor);
+}
+#gameBoard > div {
+        background-color: #fff;
+        font-size: 4rem;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 }
