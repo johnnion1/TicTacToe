@@ -1,3 +1,32 @@
-body {
+* {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+}
+body, html {
         background-color: rgb(255, 217, 255);
+        width: 100%;
+        height: 100%;
+}
+#container {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 15vh 1fr 15vh;
+        grid-template-rows: 15vh 1fr  5vh min-content 15vh;
+
+
+}
+#playerDisplay {
+        background-color: #fff;
+        grid-row: 2 / 3;
+        grid-column: 2 / 3;
+}
+#gameBoard {   
+        height: 50vh;
+        width: 50vh;
+        background-color: lightblue;
+        grid-row: 4 / 5;
+        grid-column: 2 / 3 ;
+        
 }
