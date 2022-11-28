@@ -1,7 +1,7 @@
 const myModule = (function() {
 
         let _gameBoard = {
-                board: [null, null, null, 'O', null, null, null, null, null]
+                board: [null, 'X', null, 'O', 'X', null, null, 'O', null]
         };
         /* Confused: used    Object Literal Module   pattern but is different
         watch videos
@@ -14,7 +14,15 @@ const myModule = (function() {
                 container: document.querySelector('#container'),
                 playerDisplay: document.querySelector('#playerDisplay'),
                 gameBoardSelect: document.querySelector('#gameBoard'),
-        }
+                startButton: document.querySelector('#startButton'),
+        };
+        
+        const _renderTiles = (function () {
+                _cacheDom.startButton.addEventListener('click', () => {
+                game.startGame();
+        });
+        })();
+
         const _displayController = () => {
                 console.log(_gameBoard.board);
                 for (let i = 0; i < _gameBoard.board.length; i++) {
@@ -25,7 +33,9 @@ const myModule = (function() {
                 }
         };
         const game = {
-
+        startGame: () => {
+                _displayController();
+        },
         setMark:  function(coordinate, playerMark) {
                 _gameBoard.board.splice(coordinate, 1, playerMark); 
                 _displayController();

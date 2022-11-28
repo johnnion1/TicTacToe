@@ -53,3 +53,10 @@ body, html {
         justify-content: center;
         align-items: center;
 }
+#startButton {
+        padding: 2vh;
+        position: fixed;
+        top: 5vh;
+        left: 35vh;
+        
+}
