@@ -13,8 +13,32 @@ const myModule = (function() {
                         startButton: document.querySelector('#startButton'),
                 },
                 checkSpace: (coordinate) => {
-                        console.log(coordinate);
-                }
+                        if (_gameBoard.board[coordinate] == null) { return true };
+                         },
+                        // returns true if space at coordinate is empty
+                        
+                addClickListener: (element, fieldIndex) => {
+                        element.addEventListener('click', () => {
+                       console.log(_gameBoard.checkSpace(fieldIndex))
+                       if ( _gameBoard.checkSpace(fieldIndex) ) {
+                        game.setMark(fieldIndex, 'Trolol');
+                        }
+                        else { console.log('no posíble') }
+                  })
+                },
+                
+
+                /* 
+        in gameboard:
+        addeventlistener to fields ('click', => {
+               if   checkSpace(data-index)
+                setmark(data-index, game.getActivePlayerMark())
+        })
+
+        Where game.getActivePlayerMark() is either 'X' or 'Y' based on
+        _players.{player}.mark
+
+        */
 
         };
       
@@ -29,24 +53,16 @@ const myModule = (function() {
                 for (let i = 0; i < _gameBoard.board.length; i++) {
                         let field = document.createElement('div');
                         field.textContent = _gameBoard.board[i];
+                        field.setAttribute('class', 'field');
+                        field.setAttribute('data-index', i);
+                        _gameBoard.addClickListener(field, i);
                         _gameBoard.cacheDom.gameBoardSelect.appendChild(field);
-
                 }
         };
 
         const _players = {
                 player1: null,
                 player2: null,
-                addPlayer: () => {
-                        let selectName = null;
-                        if (_players.player1 !== null) {
-                                selectName = prompt("Player two, what's your name?");
-                                _players.player2 = playerFactory(selectName, 'O');
-                        } else {
-                        selectName = prompt("Player One, what's your name?");
-                        _players.player1 = playerFactory(selectName, 'X');
-                        }
-                },
         };
         
         const game = {
@@ -60,14 +76,32 @@ const myModule = (function() {
                 },
                 setMark: (coordinate, playerMark) => {
                         _gameBoard.board.splice(coordinate, 1, playerMark); 
-                        _displayController();
+                },
+                /* updateField: (coordinate) => {
+                        
+                } */
+                addPlayer: () => {
+                        let selectName = null;
+                        if ( _players.player1 !== null && _players.player2 !== null ) {
+                                alert ('Only 2 players in this game!');
+                                return;
+                        } 
+                        else if (_players.player1 !== null) {
+                                selectName = prompt("Player two, what's your name?", "Turner");
+                                _players.player2 = playerFactory(selectName, 'O');
+                        } 
+                        else {
+                        selectName = prompt("Player One, what's your name?", "Underberg");
+                        _players.player1 = playerFactory(selectName, 'X');
+                        }
                 },
         }
 
        
 return {
         game,
-        _players
+        _players,
+        _gameBoard,
 }
 })();
 
