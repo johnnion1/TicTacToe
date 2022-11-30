@@ -11,7 +11,7 @@ const myModule = (function() {
                         playerDisplay: document.querySelector('#playerDisplay'),
                         gameBoardSelect: document.querySelector('#gameBoard'),
                         startButton: document.querySelector('#startButton'),
-                        tiles: document.querySelectorAll('.tile'),
+                        tiles: Array.from(document.querySelectorAll('.tile')),
                 },
                 checkSpace: (coordinate) => {
                         if (_gameBoard.board[coordinate] == null) { return true }
@@ -19,46 +19,62 @@ const myModule = (function() {
                          },
                         // returns true if space at coordinate is empty
                         
-                addClickListener: () => {
-                        let tileArray = Array.from(_gameBoard.cacheDom.tiles);
-                        tileArray.forEach(tile => {
-                                tile.setAttribute('ind', tileArray.indexOf(tile));
-                                console.log(tile.ind);
- // TO updatefield()/ reloadboard()    tile.innerHTML = _gameBoard.board[index]; 
-                                tile.addEventListener('click', () => {
-                                        
-                                        console.log(tile.ind)
-                         /*       console.log(_gameBoard.checkSpace(index));
-                         if ( _gameBoard.checkSpace(index) ) {
-                                game.setMark(index, 'Trolol');
-                                console.log('Works')
-                        }
-                         else { console.log('no posíble') }
-                         }  */
-                        })
-                        })
-                        },
 
-                        /*             loadBoard: () => {
-                        create fields with for() loop over gameboard.board
-                }, */
-                
-                /* updateField: (coordinate) => {
-                        
-                }, */
 
-                /* 
-        in gameboard:
+
+/* 
+        in _gameBoard:
         addeventlistener to fields ('click', => {
                if   checkSpace(data-index)
                 setmark(data-index, game.getActivePlayerMark())
         })
+// updatefield() or reloadboard() etc    tile[data-index].innerHTML = _gameBoard.board[index]; 
 
-        Where game.getActivePlayerMark() is either 'X' or 'Y' based on
-        _players.{player}.mark
 
-        */
+==>> clicklistener only return tiles' data index? -> setMark(daraindex); checkspace(dataIndex);
+*/
 
+                addClickListener: () => {
+                        _gameBoard.cacheDom.tiles.forEach(tile => {
+                                tile.setAttribute('tileIndex', _gameBoard.cacheDom.tiles.indexOf(tile));});
+                       _gameBoard.cacheDom.tiles.forEach(tile => {
+                                console.log( tile.getAttribute('tileIndex'))
+                        tile.textContent = _gameBoard.board[tile.getAttribute('tileIndex')]
+                        tile.addEventListener('click', () => {
+                                  console.log('checkSpace(ind):   ' + _gameBoard.checkSpace(tile.getAttribute('tileIndex')));
+                        /* ==>>   cant access newly set attribute, even though it can be seen in the dev tools
+                                when inspecting the tile (they have correct 'tileIndex' properties) 
+                                tiles array elements also have the correct ind property
+                                WHY DOES IT LOG UNDEFINED ??
+                                because it gives the HTML Div element object, which doesnt have .ind
+                                have to use tile.getAttribute('tileIndex')!
+                                */
+                        
+                       
+                      /*   if ( _gameBoard.checkSpace(index) ) {
+                                game.setMark(index, 'Trolol');
+                                console.log('Works')
+                        }
+                         else { console.log('no posíble') }
+                         }  
+                         
+                        })
+                        }, */
+                        })
+
+                });
+                },
+                        
+
+                
+
+/* loadBoard: () => {
+        create fields with for() loop over gameboard.board
+}, */
+
+/* updateField: (coordinate) => {
+        
+}, */
         };
       
         const _renderTiles = (function () {
