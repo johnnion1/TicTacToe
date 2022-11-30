@@ -5,7 +5,7 @@ const playerFactory = (name, mark) => {
 const myModule = (function() {
 
         let _gameBoard = {
-                board: [null, 'X', null, 'O', 'X', null, null, 'O', null],
+                board: [null, null, null, null, null, null, null, null, null],
                 cacheDom: {
                         container: document.querySelector('#container'),
                         playerDisplay: document.querySelector('#playerDisplay'),
@@ -41,9 +41,8 @@ const myModule = (function() {
                         tile.addEventListener('click', () => {
                                   console.log('checkSpace(ind):   ' + _gameBoard.checkSpace(field));
                         if ( _gameBoard.checkSpace(field)) {
-                                game.setMark(field, 'Test');
+                                game.setMark(field, game.getActivePlayerMark());
                                 console.log('Works')
-                                //updateTiles
                                 tile.textContent = _gameBoard.board[field];
                         }
                          else { alert ('no posíble') }
@@ -89,16 +88,19 @@ const myModule = (function() {
         const _players = {
                 player1: null,
                 player2: null,
+                activePlayer: 1,
         };
         
         const game = {
                 startGame: () => {
                         _displayController();
+                        game.addPlayer();
+                        game.addPlayer();
                 },
                 newPlayer: () => {
                         // FUNCTION:     make name input div appear 
                         //  get input -> addplayer(input)=
-                        _players.addPlayer();
+                        /* _players.addPlayer(playerName.input); */
                 },
                 setMark: (coordinate, playerMark) => {
                         _gameBoard.board.splice(coordinate, 1, playerMark); 
@@ -119,6 +121,16 @@ const myModule = (function() {
                         _players.player1 = playerFactory(selectName, 'X');
                         }
                 },
+                getActivePlayerMark: () => {
+                        if (_players.activePlayer == 1) {
+                                _players.activePlayer++;
+                                return _players.player1.mark;
+                                
+                        } else {
+                               _players.activePlayer--; 
+                               return _players.player2.mark; 
+                        }
+                }
         }
 
        
@@ -128,6 +140,44 @@ return {
         _gameBoard,
 }
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 /* 
