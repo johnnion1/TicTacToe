@@ -25,7 +25,7 @@ const myModule = (function() {
                if   checkSpace(data-index)
                 setmark(data-index, game.getActivePlayerMark())
         })
-// updatefield() or reloadboard() etc    tile[data-index].innerHTML = _gameBoard.board[index]; 
+// updatefield() or updateTiles() etc    tile[data-index].innerHTML = _gameBoard.board[index]; 
 
 */
 
@@ -33,16 +33,20 @@ const myModule = (function() {
                         _gameBoard.cacheDom.tiles.forEach(tile => {
                                 tile.setAttribute('tileIndex', _gameBoard.cacheDom.tiles.indexOf(tile));
                                 });
+                                
                        _gameBoard.cacheDom.tiles.forEach(tile => {
-                                console.log( tile.getAttribute('tileIndex'))
-                        tile.textContent = _gameBoard.board[tile.getAttribute('tileIndex')]
+                        let field =  tile.getAttribute('tileIndex');
+                                console.log( field)
+                        tile.textContent = _gameBoard.board[field]
                         tile.addEventListener('click', () => {
-                                  console.log('checkSpace(ind):   ' + _gameBoard.checkSpace(tile.getAttribute('tileIndex')));
-                         /*  if ( _gameBoard.checkSpace(index) ) {
-                                game.setMark(index, 'Trolol');
+                                  console.log('checkSpace(ind):   ' + _gameBoard.checkSpace(field));
+                        if ( _gameBoard.checkSpace(field)) {
+                                game.setMark(field, 'Test');
                                 console.log('Works')
+                                //updateTiles
+                                tile.textContent = _gameBoard.board[field];
                         }
-                         else { console.log('no posíble') } */
+                         else { alert ('no posíble') }
                          })
                         })
 
