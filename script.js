@@ -121,7 +121,7 @@ const myModule = (function() {
                         _players.player1 = playerFactory(selectName, 'X');
                         }
                 },
-                getActivePlayerMark: () => {
+                getActivePlayerMark: () => {   //change to getActivePlayer() --> return _players.player1 or player2
                         if (_players.activePlayer == 1) {
                                 _players.activePlayer++;
                                 return _players.player1.mark;
@@ -130,7 +130,22 @@ const myModule = (function() {
                                _players.activePlayer--; 
                                return _players.player2.mark; 
                         }
-                }
+                },
+                checkGameState: () => { //if Array.from(i)
+                        let i = 0;
+                        if (_gameBoard.board[i] == _gameBoard.board[++i] == _gameBoard.board[++i]) {
+                                alert('win!')
+                        } else { console.log('not registered')}
+                },
+
+                areIdentical: (array) => {
+                        for(let i = 0; i < array.length + 1; i++) {
+                                if( array[i] == array[i++] == array[i++]) {
+                                        console.log(i, 'yes');
+
+                                }else console.log(i, 'no');
+                        } 
+                },
         }
 
        
