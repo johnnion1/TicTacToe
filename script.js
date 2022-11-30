@@ -19,9 +19,6 @@ const myModule = (function() {
                          },
                         // returns true if space at coordinate is empty
                         
-
-
-
 /* 
         in _gameBoard:
         addeventlistener to fields ('click', => {
@@ -30,40 +27,27 @@ const myModule = (function() {
         })
 // updatefield() or reloadboard() etc    tile[data-index].innerHTML = _gameBoard.board[index]; 
 
-
-==>> clicklistener only return tiles' data index? -> setMark(daraindex); checkspace(dataIndex);
 */
 
                 addClickListener: () => {
                         _gameBoard.cacheDom.tiles.forEach(tile => {
-                                tile.setAttribute('tileIndex', _gameBoard.cacheDom.tiles.indexOf(tile));});
+                                tile.setAttribute('tileIndex', _gameBoard.cacheDom.tiles.indexOf(tile));
+                                });
                        _gameBoard.cacheDom.tiles.forEach(tile => {
                                 console.log( tile.getAttribute('tileIndex'))
                         tile.textContent = _gameBoard.board[tile.getAttribute('tileIndex')]
                         tile.addEventListener('click', () => {
                                   console.log('checkSpace(ind):   ' + _gameBoard.checkSpace(tile.getAttribute('tileIndex')));
-                        /* ==>>   cant access newly set attribute, even though it can be seen in the dev tools
-                                when inspecting the tile (they have correct 'tileIndex' properties) 
-                                tiles array elements also have the correct ind property
-                                WHY DOES IT LOG UNDEFINED ??
-                                because it gives the HTML Div element object, which doesnt have .ind
-                                have to use tile.getAttribute('tileIndex')!
-                                */
-                        
-                       
-                      /*   if ( _gameBoard.checkSpace(index) ) {
+                         /*  if ( _gameBoard.checkSpace(index) ) {
                                 game.setMark(index, 'Trolol');
                                 console.log('Works')
                         }
-                         else { console.log('no posíble') }
-                         }  
-                         
-                        })
-                        }, */
+                         else { console.log('no posíble') } */
+                         })
                         })
 
-                });
                 },
+                
                         
 
                 
@@ -84,14 +68,16 @@ const myModule = (function() {
         })();
 
         const _displayController = () => {
-                let executed = false;
+
+                _gameBoard.addClickListener();
+               /*  let executed = false;
                 if (!executed) {
-                        /* add click listener()
-                         */
+                        // add click listener()
+                executed = true;
                 }
                 console.log(_gameBoard.board);
 
-
+ */
 
         };
 
