@@ -16,7 +16,7 @@ const myModule = (function() {
                 checkSpace: (coordinate) => {
                         if (_gameBoard.board[coordinate] == null) { return true }
                         else { return false };
-                         },
+                },
                         // returns true if space at coordinate is empty
                         
 /* 
@@ -27,7 +27,23 @@ const myModule = (function() {
         })
 // updatefield() or updateTiles() etc    tile[data-index].innerHTML = _gameBoard.board[index]; 
 
-*/
+*/              
+                patterns: [
+                [0,1,2], 
+                [3,4,5], 
+                [6,7,8], 
+                [0,3,6], 
+                [1,4,7], 
+                [2,5,8], 
+                [0,4,8], 
+                [2,4,6], 
+                ],
+
+                gameBoardChecker: () => {
+                        
+                },
+                
+
 
                 addClickListener: () => {
                         _gameBoard.cacheDom.tiles.forEach(tile => {
@@ -131,21 +147,7 @@ const myModule = (function() {
                                return _players.player2.mark; 
                         }
                 },
-                checkGameState: () => { //if Array.from(i)
-                        let i = 0;
-                        if (_gameBoard.board[i] == _gameBoard.board[++i] == _gameBoard.board[++i]) {
-                                alert('win!')
-                        } else { console.log('not registered')}
-                },
-
-                areIdentical: (array) => {
-                        for(let i = 0; i < array.length + 1; i++) {
-                                if( array[i] == array[i++] == array[i++]) {
-                                        console.log(i, 'yes');
-
-                                }else console.log(i, 'no');
-                        } 
-                },
+                
         }
 
        
