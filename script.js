@@ -39,11 +39,72 @@ const myModule = (function() {
                 [2,4,6], 
                 ],
 
-                gameBoardChecker: () => {
-                        
-                },
-                
+                patternChecker: (pattern) => {
+                        for(let i = 0; i < pattern.length -1 ; i++ ) {
+                        if( _gameBoard.board[pattern[i]] !== null ) {
 
+                                let nextNumber = pattern[i + 1];
+                                let overnextnumber = pattern[i + 2]
+                              //  console.log(_gameBoard.board[pattern[i]] + ', next one: ' + _gameBoard.board[nextNumber]);
+                               if(_gameBoard.board[pattern[i]] == _gameBoard.board[nextNumber] && _gameBoard.board[nextNumber] == _gameBoard.board[overnextnumber]) {
+                                return true; }
+                               }
+                        }
+                },
+
+                winChecker: () => {
+                        _gameBoard.patterns.forEach(pattern => {
+                        if (_gameBoard.patternChecker(pattern)) {alert('WINER')}
+                        })                        
+                },
+
+
+
+
+                //isSameMark tests:
+                //for (let patNumber = 0, i < pattern.length, i++)? 
+                //or forEach??
+
+                 /*  (while (unneccessary bc returns true or false anyway? -- that's .every i think)
+                  pattern.forEach(patNumber => { 
+                 board[patnum] == getActivePlayerMark
+                        
+                  }  
+                */
+                             //   while _gameBoard.board[]
+
+
+                      /*  if (array.forEach(item => { item ? true: false;})) */
+                       //the whole clause suould equal true if array[0] == array[1] == array[2] 
+                        
+              /*   for (let pattern = 0; pattern < _gameBoard.patterns.length; pattern++) {
+                       let result =  pattern.forEach(num => _gameBoard.board[num] == 'X')
+                       console.log(result)
+                }          */
+                
+                  
+                  /* )
+                  for (let pattern = 0; pattern < _gameBoard.patterns.length; pattern++) {
+                       let result =  pattern.forEach(num => _gameBoard.board[num] == 'X')
+                       console.log(result)
+                }          */
+                
+               /*  let result = pattern.every(patter => _gameBoard.board[patter.pat] == 'X'/* game.getActivePlayerMark() */
+        
+                
+                       //reduce: gameboard.board.reduce(spot =>)
+                       //(patterns -> objects?) pattern.every ((for every pattern.number)) => _gameBoard.board[pattern.number] == activePlayerMark();
+
+
+                gameBoardChecker: () => {
+                        patterns.forEach(pattern => {
+                                pattern.forEach(spotNumber, index => {
+
+                                })
+                                
+                        })
+                        console.log()
+                },
 
                 addClickListener: () => {
                         _gameBoard.cacheDom.tiles.forEach(tile => {
@@ -60,6 +121,7 @@ const myModule = (function() {
                                 game.setMark(field, game.getActivePlayerMark());
                                 console.log('Works')
                                 tile.textContent = _gameBoard.board[field];
+                                _gameBoard.winChecker();
                         }
                          else { alert ('no posíble') }
                          })
